@@ -55,20 +55,20 @@ def get_company_list(date_):
 
 
 def get_company_details(company_list):
-    chrome_options = webdriver.ChromeOptions()
-
-    chrome_options.binary_location = '.apt/usr/bin/google-chrome-stable'
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('headless')
-
-    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
-    # driver = webdriver.Chrome(executable_path="chromedriver.exe")
-    url = "https://login.yahoo.com/config/login?"
-    site = driver.get(url)
-    driver.implicitly_wait(50)
-    time.sleep(50)
-    print("chrome_connected")
+    # chrome_options = webdriver.ChromeOptions()
+    #
+    # chrome_options.binary_location = '.apt/usr/bin/google-chrome-stable'
+    # chrome_options.add_argument('--disable-gpu')
+    # chrome_options.add_argument('--no-sandbox')
+    # chrome_options.add_argument('headless')
+    #
+    # driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+    # # driver = webdriver.Chrome(executable_path="chromedriver.exe")
+    # url = "https://login.yahoo.com/config/login?"
+    # site = driver.get(url)
+    # driver.implicitly_wait(50)
+    # time.sleep(50)
+    # print("chrome_connected")
 
     # signin_button = driver.find_element_by_xpath("//*[@id=\"header-signin-link\"]")
     # signin_button.click()
@@ -87,7 +87,7 @@ def get_company_details(company_list):
     # password_button.click()
 
     #     url = "https://login.yahoo.com/config/login?"
-    summary_base_url = "https://finance.yahoo.com/quote/{:s}/company360?p={:s}"
+    # summary_base_url = "https://finance.yahoo.com/quote/{:s}/company360?p={:s}"
     base_marketable_url = "https://finance.yahoo.com/quote/{}"
 
     #     driver = webdriver.Chrome()
@@ -101,8 +101,8 @@ def get_company_details(company_list):
         url = base_marketable_url.format(i)
 
         # driver.get(url_summary)
-        html_source = driver.page_source
-        source = BeautifulSoup(html_source)
+        # html_source = driver.page_source
+        # source = BeautifulSoup(html_source)
 
         response = requests.get(url)
         data = response.text
