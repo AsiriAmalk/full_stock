@@ -8,6 +8,8 @@ from selenium import webdriver
 import time
 import os
 
+GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 # driver = webdriver.Chrome(executable_path="chromedriver.exe")
 # # driver = webdriver.Chrome(executable_path="chromedriver.exe")
 # url = "https://login.yahoo.com/config/login?"
@@ -52,12 +54,10 @@ def get_company_list(date_):
 
 def get_company_details(company_list):
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    chrome_options.binary_location = GOOGLE_CHROME_PATH
+    driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
     # driver = webdriver.Chrome(executable_path="chromedriver.exe")
     url = "https://login.yahoo.com/config/login?"
     site = driver.get(url)
