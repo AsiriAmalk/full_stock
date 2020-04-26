@@ -113,7 +113,10 @@ def get_company_details(company_list):
         company_detail = soup.find_all('div', {
             'class': "D(ib) Mt(-5px) Mend(20px) Maw(56%)--tab768 Maw(52%) Ov(h) smartphone_Maw(85%) smartphone_Mend(0px)"})[
             0].text
-        value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'})[0].text
+        try:
+            value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'})[0].text
+        except:
+            value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}) +" ADDED"
         percentage = soup.find_all('span', {'data-reactid': '16'})[0].text
         description = soup.find_all('span', {'data-reactid': '18'})[0].text
         previous_close = soup.find_all('span', {'data-reactid': '16'})[1].text
@@ -159,7 +162,7 @@ def all_stock(request):
     selected_date = "{:s}-{:s}-{:s}".format(search_date.split(" ")[2], month, search_date.split(" ")[1].split(",")[0])
 
     company_list = get_company_list(selected_date)
-    company_descriptions = get_company_details(company_list)
+    company_descriptions = get_company_details(company_list[:5])
 
     print(company_list)
     stuff_for_frontend = {
