@@ -6,9 +6,8 @@ from bs4 import BeautifulSoup
 from django.shortcuts import render
 from selenium import webdriver
 import time
+import os
 
-
-#
 # driver = webdriver.Chrome(executable_path="chromedriver.exe")
 # # driver = webdriver.Chrome(executable_path="chromedriver.exe")
 # url = "https://login.yahoo.com/config/login?"
@@ -52,7 +51,14 @@ def get_company_list(date_):
 
 
 def get_company_details(company_list):
-    driver = webdriver.Chrome(executable_path="chromedriver.exe")
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    # driver = webdriver.Chrome(executable_path="chromedriver.exe")
     url = "https://login.yahoo.com/config/login?"
     site = driver.get(url)
     driver.implicitly_wait(50)
