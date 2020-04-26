@@ -15,6 +15,8 @@ import os
 # url = "https://login.yahoo.com/config/login?"
 # site = driver.get(url)
 
+CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
+
 
 # def get_summary(company_abr, driver=driver):
 #     summary_base_url = "https://finance.yahoo.com/quote/{:s}/company360?p={:s}"
@@ -54,12 +56,13 @@ def get_company_list(date_):
 
 def get_company_details(company_list):
     chrome_options = webdriver.ChromeOptions()
+
+    chrome_options.binary_location = '.apt/usr/bin/google-chrome-stable'
     chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_PATH")
-    driver = webdriver.Chrome(execution_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    chrome_options.add_argument('headless')
+
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
     # driver = webdriver.Chrome(executable_path="chromedriver.exe")
     url = "https://login.yahoo.com/config/login?"
     site = driver.get(url)
