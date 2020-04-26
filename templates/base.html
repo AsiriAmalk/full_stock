@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>All Stock Viewer</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.pngrepo.com/png/192519/180/warehouse-stock.png"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+
+
+<nav>
+    <div class="container nav-wrapper">
+        <a href="/" class="brand-logo">All Stock</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html">News Letter</a></li>
+            <li><a href="badges.html"></a></li>
+            <!-- Dropdown Trigger -->
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a>
+                <!-- Dropdown Structure -->
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#!">one</a></li>
+                    <li><a href="#!">two</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#!">three</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1 class="center">Check your All Stocks in one Place!</h1>
+    <div class="row">
+        <div class="col s4 ">
+            <div class="center">
+                <i class="large material-icons" style="color: green">account_balance</i>
+                <p>Fast Stock Market Web Scrapper</p>
+                <p class="light center">Scrap away right with a beautiful GUI</p>
+            </div>
+        </div>
+        <div class="col s4 ">
+            <div class="center">
+                <i class="large material-icons" style="color: #ffca28">replay</i>
+                <p>Rewind your stocks</p>
+                <p class="light center">All things at one place</p>
+            </div>
+        </div>
+        <div class="col s4 ">
+            <div class="center">
+                <i class="large material-icons" style="color: blue">domain</i>
+                <p>Multiple Companies at one place</p>
+                <p class="light center">We have built this to see all your companies</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container s4 center">
+
+    <h3>Enter your Yahoo finance credentials</h3>
+    <form onclick="location.href = '{% url 'open_browser' %}'" method="get" action="asd">
+        <button class="btn waves-effect waves-light modal-trigger text-left" value="Click" type="submit" name="print_btn"  href="#modal1">
+            Open in Browser
+            <i class="material-icons right">open_in_browser</i>
+        </button>
+    </form>
+    {#    <form onclick="location.href = '{% url 'print_from_button' %}'" method="get">#}
+    {#        {% csrf_token %}#}
+    {#        <button class="btn waves-effect waves-light" value="Click" type="submit" name="print_btn">Search#}
+    {#            <i class="material-icons right">all_inclusive</i>#}
+    {#        </button>#}
+    {#    </form>#}
+</div>
+<div class="container s4 center">
+    <h3>Enter date</h3>
+    <form action="{% url 'all_stock' %}" method="post">
+        {% csrf_token %}
+        <div class="input-filed s4 center">
+            <input id="searchdate" type="text" name="search_date" class="datepicker s4 center"
+                   placeholder="Select the date">
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Search in exclusive
+            <i class="material-icons right">all_inclusive</i>
+        </button>
+    </form>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Important!</h4>
+        <h5>You must log in to both, Default web browser and also this newly opened Chrome browser.  With your
+            <a href="https://login.yahoo.com/config/login/" target="_blank" >Yahoo Finance</a> Credentials.</h5>
+
+        <h5>Please do not close the opened Chrome browser while this process!</h5>
+    </div>
+    <div class="modal-footer ">
+         <button class="modal-close btn waves-effect waves-light">
+             OK
+              <i class="material-icons right">exit_to_app</i>
+        </button>
+    </div>
+  </div>
+
+
+</div>
+{% block content %}
+
+{% endblock %}
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    const Calender = document.querySelector('.datepicker');
+    M.Datepicker.init(Calender, {});
+</script>
+<script>
+    document.getElementById("searchdate").defaultValue = "Apr 23, 2020";
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>
+</body>
+</html>
+

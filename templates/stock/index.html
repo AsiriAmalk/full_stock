@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for company in company_descriptions %}
+        <h5>{{ company }}</h5>
+    {% endfor %}
+{% endblock %}
