@@ -1,0 +1,1 @@
+web: gunicorn all_stock.wsgi
