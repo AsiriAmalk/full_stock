@@ -68,6 +68,7 @@ def get_company_details(company_list):
     site = driver.get(url)
     driver.implicitly_wait(50)
     time.sleep(50)
+    print("chrome_connected")
 
     # signin_button = driver.find_element_by_xpath("//*[@id=\"header-signin-link\"]")
     # signin_button.click()
@@ -96,10 +97,10 @@ def get_company_details(company_list):
 
     print(company_list)
     for i in company_list:
-        url_summary = summary_base_url.format(i, i)
+        # url_summary = summary_base_url.format(i, i)
         url = base_marketable_url.format(i)
 
-        driver.get(url_summary)
+        # driver.get(url_summary)
         html_source = driver.page_source
         source = BeautifulSoup(html_source)
 
@@ -121,10 +122,11 @@ def get_company_details(company_list):
         company_name = company_detail.split("-")[1]
         company_currency = company_detail.split("-")[2]
         company_title = "{:s}, Inc.({:s})".format(company_name, company_abr)
-        try:
-            summary = source.find_all("header", {"data-test": "comp360-summary"})[0].text
-        except:
-            summary = company_detail
+        summary = "Ok"
+        # try:
+        #     summary = source.find_all("header", {"data-test": "comp360-summary"})[0].text
+        # except:
+        #     summary = company_detail
 
         company_descriptions.append(
             (company_title,
