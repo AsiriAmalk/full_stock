@@ -1,6 +1,30 @@
 {% extends 'base.html' %}
+
+
 {% block content %}
+    <div class="row">
     {% for company in company_descriptions %}
-        <h5>{{ company }}</h5>
+        <div class="col s4 ">
+            <div class="card scrollspy">
+                <h5 style="font-weight: bold"> {{ company.0 }} </h5>
+                <h6>{{ company.2 }}</h6>
+                <h4 style="font-weight: bold">{{ company.5 }} </h4>
+                <h5>{{ company.4 }}</h5>
+                <h6>{{ company.1 }}</h6>
+                <div class="card-image">
+                    <a href="{{ company.8 }}" target="_blank">
+                        <img src="{{STATIC_URL}}{{ company.7 }}">
+                    </a>
+{#                    <span class="card-title" style="color: blue">{{ company.0 }}</span>#}
+                </div>
+                <div class="card-content section scrollspy">
+                    <p>{{ company.6 }}</p>
+                </div>
+{#                <div class="card-action">#}
+{#                    <a href="#">View Listing: Price TEST PRICE</a>#}
+{#                </div>#}
+            </div>
+        </div>
     {% endfor %}
+</div>
 {% endblock %}

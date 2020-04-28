@@ -1,3 +1,29 @@
 nav {
     background-color: #2E86C1;
 }
+
+h5 {
+  font-weight: bold;
+}
+
+td.red {
+  color: red;
+}
+
+td.green {
+  color: green;
+}
+
+h1, h2, h3, h4, h5, h6 {
+   margin: 1.5rem 8px 1.5em 8px;
+}
+
+.card {
+    height: 800px;
+    overflow: hidden;
+}
+
+.card-image {
+    height: 350px;
+    overflow: hidden;
+}
