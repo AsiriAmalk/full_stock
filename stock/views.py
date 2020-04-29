@@ -64,9 +64,11 @@ def get_company_details(company_list):
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.get('https://www.yahoo.com/')
     cookies = pickle.load(open("cookies.pkl", "rb"))
-    # cookies = pickle.load(open("cookies.pkl", "rb"))
-    # for cookie in cookies:
-    #     driver.add_cookie(cookie)
+    cookies = pickle.load(open("cookies.pkl", "rb"))
+    for cookie in cookies:
+        driver.add_cookie(cookie)
+
+    print(driver.page_source)
 
     #     url = "https://login.yahoo.com/config/login?"
     summary_base_url = "https://finance.yahoo.com/quote/{:s}/company360?p={:s}"
