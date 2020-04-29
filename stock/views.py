@@ -89,55 +89,55 @@ def get_company_details(company_list):
         html_source = driver.page_source
         source = BeautifulSoup(html_source)
         print(source)
-    #
-    #     response = requests.get(url)
-    #     data = response.text
-    #
-    #     soup = BeautifulSoup(data, features="html.parser")
-    #
-    #     soup.find_all('span', {'data-reactid': '14'})
-    #     company_detail = soup.find_all('div', {
-    #         'class': "D(ib) Mt(-5px) Mend(20px) Maw(56%)--tab768 Maw(52%) Ov(h) smartphone_Maw(85%) smartphone_Mend(0px)"})[
-    #         0].text
-    #     try:
-    #         value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'})[0].text
-    #     except:
-    #         value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}) + " ADDED"
-    #     percentage = soup.find_all('span', {'data-reactid': '16'})[0].text
-    #     description = soup.find_all('span', {'data-reactid': '18'})[0].text
-    #     try:
-    #         previous_close = soup.find_all('span', {'data-reactid': '16'})[1].text
-    #     except:
-    #         previous_close = "234"
-    #
-    #     company_abr = company_detail.split("-")[0]
-    #     company_name = company_detail.split("-")[1]
-    #     company_currency = company_detail.split("-")[2]
-    #     company_title = "{:s}, Inc.({:s})".format(company_name, company_abr)
-    #
-    #     try:
-    #         summary = source.find_all("header", {"data-test": "comp360-summary"})[0].text
-    #     except:
-    #         summary = "Data is not made public by this company"
-    #     try:
-    #         image = driver.find_element_by_class_name('_29rOq').screenshot_as_png
-    #         image = Image.open(BytesIO(image))  # uses PIL library to open image in memory
-    #         img_url = 'static/img/graph/' + i + "_graph.png"
-    #         image.save(img_url)
-    #     except:
-    #         img_url = "static/img/nodata.png"
-    #
-    #     company_descriptions.append(
-    #         (company_title,
-    #          description,
-    #          company_currency,
-    #          previous_close,
-    #          percentage,
-    #          value,
-    #          summary,
-    #          img_url,
-    #          url)
-    #     )
+
+        response = requests.get(url)
+        data = response.text
+
+        soup = BeautifulSoup(data, features="html.parser")
+
+        soup.find_all('span', {'data-reactid': '14'})
+        company_detail = soup.find_all('div', {
+            'class': "D(ib) Mt(-5px) Mend(20px) Maw(56%)--tab768 Maw(52%) Ov(h) smartphone_Maw(85%) smartphone_Mend(0px)"})[
+            0].text
+        try:
+            value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'})[0].text
+        except:
+            value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}) + " ADDED"
+        percentage = soup.find_all('span', {'data-reactid': '16'})[0].text
+        description = soup.find_all('span', {'data-reactid': '18'})[0].text
+        try:
+            previous_close = soup.find_all('span', {'data-reactid': '16'})[1].text
+        except:
+            previous_close = "234"
+
+        company_abr = company_detail.split("-")[0]
+        company_name = company_detail.split("-")[1]
+        company_currency = company_detail.split("-")[2]
+        company_title = "{:s}, Inc.({:s})".format(company_name, company_abr)
+
+        try:
+            summary = source.find_all("header", {"data-test": "comp360-summary"})[0].text
+        except:
+            summary = "Data is not made public by this company"
+        try:
+            image = driver.find_element_by_class_name('_29rOq').screenshot_as_png
+            image = Image.open(BytesIO(image))  # uses PIL library to open image in memory
+            img_url = 'static/img/graph/' + i + "_graph.png"
+            image.save(img_url)
+        except:
+            img_url = "static/img/nodata.png"
+
+        company_descriptions.append(
+            (company_title,
+             description,
+             company_currency,
+             previous_close,
+             percentage,
+             value,
+             summary,
+             img_url,
+             url)
+        )
 
     driver.close()
     company_descriptions = [(' 1st Source CorporationNasdaqGS , Inc.(SRCE )',
