@@ -101,7 +101,10 @@ def get_company_details(company_list):
             value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}) + " ADDED"
         percentage = soup.find_all('span', {'data-reactid': '16'})[0].text
         description = soup.find_all('span', {'data-reactid': '18'})[0].text
-        previous_close = soup.find_all('span', {'data-reactid': '16'})[1].text
+        try:
+            previous_close = soup.find_all('span', {'data-reactid': '16'})[1].text
+        except:
+            previous_close = "234"
 
         company_abr = company_detail.split("-")[0]
         company_name = company_detail.split("-")[1]
