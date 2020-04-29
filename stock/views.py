@@ -140,36 +140,36 @@ def get_company_details(company_list):
         )
 
     driver.close()
-    company_descriptions = [(' 1st Source CorporationNasdaqGS , Inc.(SRCE )',
-                             'As of  1:51PM EDT. Market open.',
-                             ' NasdaqGS Real Time Price. Currency in USD',
-                             '31.85',
-                             '+1.89 (+5.93%)',
-                             '33.74',
-                             "SRCE’s innovation outlook is neutral based on a current score of 27 out of 99, underperforming sector average. Jobs growth over the past year has increased and insiders sentiment is neutral. Over the past 4 quarters SRCE beat earnings estimates 2 times and it pays dividend lower than its peers",
-                             'static/img/graph/SRCE_graph.png',
-                             'https:/finance.yahoo.com/quote//SRCE'),
-                            ("(Altigen Communications, Inc.Other OTC , Inc.(ATGN )",
-                            'As of  1:03PM EDT. Market open.',
-                            ' Other OTC Delayed Price. Currency in USD',
-                            '1.4900',
-                            '+0.0100 (+0.67%)',
-                            '1.5000',
-                            ' ',
-                            'static/img/nodata.png',
-                            'https:/finance.yahoo.com/quote/ATGN'),
-                            ("(Altigen Communications, Inc.Other OTC , Inc.(ATGN )",
-                             'As of  1:03PM EDT. Market open.',
-                             ' Other OTC Delayed Price. Currency in USD',
-                             '1.4900',
-                             '+0.0100 (+0.67%)',
-                             '1.5000',
-                             ' ',
-                             'static/img/nodata.png',
-                             'https:/finance.yahoo.com/quote/ATGN')
-                            ]
-
-    print(company_descriptions)
+    # company_descriptions = [(' 1st Source CorporationNasdaqGS , Inc.(SRCE )',
+    #                          'As of  1:51PM EDT. Market open.',
+    #                          ' NasdaqGS Real Time Price. Currency in USD',
+    #                          '31.85',
+    #                          '+1.89 (+5.93%)',
+    #                          '33.74',
+    #                          "SRCE’s innovation outlook is neutral based on a current score of 27 out of 99, underperforming sector average. Jobs growth over the past year has increased and insiders sentiment is neutral. Over the past 4 quarters SRCE beat earnings estimates 2 times and it pays dividend lower than its peers",
+    #                          'static/img/graph/SRCE_graph.png',
+    #                          'https:/finance.yahoo.com/quote//SRCE'),
+    #                         ("(Altigen Communications, Inc.Other OTC , Inc.(ATGN )",
+    #                         'As of  1:03PM EDT. Market open.',
+    #                         ' Other OTC Delayed Price. Currency in USD',
+    #                         '1.4900',
+    #                         '+0.0100 (+0.67%)',
+    #                         '1.5000',
+    #                         ' ',
+    #                         'static/img/nodata.png',
+    #                         'https:/finance.yahoo.com/quote/ATGN'),
+    #                         ("(Altigen Communications, Inc.Other OTC , Inc.(ATGN )",
+    #                          'As of  1:03PM EDT. Market open.',
+    #                          ' Other OTC Delayed Price. Currency in USD',
+    #                          '1.4900',
+    #                          '+0.0100 (+0.67%)',
+    #                          '1.5000',
+    #                          ' ',
+    #                          'static/img/nodata.png',
+    #                          'https:/finance.yahoo.com/quote/ATGN')
+    #                         ]
+    #
+    # print(company_descriptions)
     return company_descriptions
 
 
