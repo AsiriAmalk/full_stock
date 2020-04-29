@@ -191,7 +191,7 @@ def all_stock(request):
     selected_date = "{:s}-{:s}-{:s}".format(search_date.split(" ")[2], month, search_date.split(" ")[1].split(",")[0])
 
     company_list = get_company_list(selected_date)
-    company_descriptions = get_company_details(company_list[:5])
+    company_descriptions = get_company_details(company_list[:3])
 
     print(company_list)
     stuff_for_frontend = {
