@@ -8,6 +8,7 @@ from selenium import webdriver
 import pickle
 from PIL import Image
 from io import BytesIO
+import os
 
 
 #
@@ -54,7 +55,13 @@ def get_company_list(date_):
 
 
 def get_company_details(company_list):
-    driver = webdriver.Firefox()
+    # driver = webdriver.Firefox()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.get('https://www.yahoo.com/')
     cookies = pickle.load(open("cookies.pkl", "rb"))
     # cookies = pickle.load(open("cookies.pkl", "rb"))
