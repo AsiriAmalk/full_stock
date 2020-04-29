@@ -64,7 +64,6 @@ def get_company_details(company_list):
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.get('https://www.yahoo.com/')
     cookies = pickle.load(open("cookies.pkl", "rb"))
-    cookies = pickle.load(open("cookies.pkl", "rb"))
     for cookie in cookies:
         driver.add_cookie(cookie)
 
@@ -82,13 +81,14 @@ def get_company_details(company_list):
     company_descriptions = []
 
     print(company_list)
-    # for i in company_list:
-    #     url_summary = summary_base_url.format(i, i)
-    #     url = base_marketable_url.format(i)
-    #
-    #     driver.get(url_summary)
-    #     html_source = driver.page_source
-    #     source = BeautifulSoup(html_source)
+    for i in company_list:
+        url_summary = summary_base_url.format(i, i)
+        url = base_marketable_url.format(i)
+
+        driver.get(url_summary)
+        html_source = driver.page_source
+        source = BeautifulSoup(html_source)
+        print(source)
     #
     #     response = requests.get(url)
     #     data = response.text
@@ -191,7 +191,7 @@ def all_stock(request):
     selected_date = "{:s}-{:s}-{:s}".format(search_date.split(" ")[2], month, search_date.split(" ")[1].split(",")[0])
 
     company_list = get_company_list(selected_date)
-    company_descriptions = get_company_details(company_list[:12])
+    company_descriptions = get_company_details(company_list[:1])
 
     print(company_list)
     stuff_for_frontend = {
