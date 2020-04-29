@@ -68,7 +68,9 @@ def get_company_details(company_list):
     for cookie in cookies:
         driver.add_cookie(cookie)
 
+    print("Starts here")
     print(driver.page_source)
+    print("Ends here")
 
     #     url = "https://login.yahoo.com/config/login?"
     summary_base_url = "https://finance.yahoo.com/quote/{:s}/company360?p={:s}"
