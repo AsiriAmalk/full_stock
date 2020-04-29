@@ -62,11 +62,11 @@ def get_company_details(company_list):
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    driver.get('https://www.yahoo.com/')
+    # driver.get('https://www.yahoo.com/')
     cookies = pickle.load(open("cookies.pkl", "rb"))
     # cookies = pickle.load(open("cookies.pkl", "rb"))
-    for cookie in cookies:
-        driver.add_cookie(cookie)
+    # for cookie in cookies:
+    #     driver.add_cookie(cookie)
 
     #     url = "https://login.yahoo.com/config/login?"
     summary_base_url = "https://finance.yahoo.com/quote/{:s}/company360?p={:s}"
@@ -78,92 +78,92 @@ def get_company_details(company_list):
     company_descriptions = []
 
     print(company_list)
-    for i in company_list:
-        url_summary = summary_base_url.format(i, i)
-        url = base_marketable_url.format(i)
-
-        driver.get(url_summary)
-        html_source = driver.page_source
-        source = BeautifulSoup(html_source)
-
-        response = requests.get(url)
-        data = response.text
-
-        soup = BeautifulSoup(data, features="html.parser")
-
-        soup.find_all('span', {'data-reactid': '14'})
-        company_detail = soup.find_all('div', {
-            'class': "D(ib) Mt(-5px) Mend(20px) Maw(56%)--tab768 Maw(52%) Ov(h) smartphone_Maw(85%) smartphone_Mend(0px)"})[
-            0].text
-        try:
-            value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'})[0].text
-        except:
-            value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}) + " ADDED"
-        percentage = soup.find_all('span', {'data-reactid': '16'})[0].text
-        description = soup.find_all('span', {'data-reactid': '18'})[0].text
-        try:
-            previous_close = soup.find_all('span', {'data-reactid': '16'})[1].text
-        except:
-            previous_close = "234"
-
-        company_abr = company_detail.split("-")[0]
-        company_name = company_detail.split("-")[1]
-        company_currency = company_detail.split("-")[2]
-        company_title = "{:s}, Inc.({:s})".format(company_name, company_abr)
-
-        try:
-            summary = source.find_all("header", {"data-test": "comp360-summary"})[0].text
-        except:
-            summary = "Data is not made public by this company"
-        try:
-            image = driver.find_element_by_class_name('_29rOq').screenshot_as_png
-            image = Image.open(BytesIO(image))  # uses PIL library to open image in memory
-            img_url = 'static/img/graph/' + i + "_graph.png"
-            image.save(img_url)
-        except:
-            img_url = "static/img/nodata.png"
-
-        company_descriptions.append(
-            (company_title,
-             description,
-             company_currency,
-             previous_close,
-             percentage,
-             value,
-             summary,
-             img_url,
-             url)
-        )
+    # for i in company_list:
+    #     url_summary = summary_base_url.format(i, i)
+    #     url = base_marketable_url.format(i)
+    #
+    #     driver.get(url_summary)
+    #     html_source = driver.page_source
+    #     source = BeautifulSoup(html_source)
+    #
+    #     response = requests.get(url)
+    #     data = response.text
+    #
+    #     soup = BeautifulSoup(data, features="html.parser")
+    #
+    #     soup.find_all('span', {'data-reactid': '14'})
+    #     company_detail = soup.find_all('div', {
+    #         'class': "D(ib) Mt(-5px) Mend(20px) Maw(56%)--tab768 Maw(52%) Ov(h) smartphone_Maw(85%) smartphone_Mend(0px)"})[
+    #         0].text
+    #     try:
+    #         value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'})[0].text
+    #     except:
+    #         value = soup.find_all('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}) + " ADDED"
+    #     percentage = soup.find_all('span', {'data-reactid': '16'})[0].text
+    #     description = soup.find_all('span', {'data-reactid': '18'})[0].text
+    #     try:
+    #         previous_close = soup.find_all('span', {'data-reactid': '16'})[1].text
+    #     except:
+    #         previous_close = "234"
+    #
+    #     company_abr = company_detail.split("-")[0]
+    #     company_name = company_detail.split("-")[1]
+    #     company_currency = company_detail.split("-")[2]
+    #     company_title = "{:s}, Inc.({:s})".format(company_name, company_abr)
+    #
+    #     try:
+    #         summary = source.find_all("header", {"data-test": "comp360-summary"})[0].text
+    #     except:
+    #         summary = "Data is not made public by this company"
+    #     try:
+    #         image = driver.find_element_by_class_name('_29rOq').screenshot_as_png
+    #         image = Image.open(BytesIO(image))  # uses PIL library to open image in memory
+    #         img_url = 'static/img/graph/' + i + "_graph.png"
+    #         image.save(img_url)
+    #     except:
+    #         img_url = "static/img/nodata.png"
+    #
+    #     company_descriptions.append(
+    #         (company_title,
+    #          description,
+    #          company_currency,
+    #          previous_close,
+    #          percentage,
+    #          value,
+    #          summary,
+    #          img_url,
+    #          url)
+    #     )
 
     driver.close()
-    # company_descriptions = [(' 1st Source CorporationNasdaqGS , Inc.(SRCE )',
-    #                          'As of  1:51PM EDT. Market open.',
-    #                          ' NasdaqGS Real Time Price. Currency in USD',
-    #                          '31.85',
-    #                          '+1.89 (+5.93%)',
-    #                          '33.74',
-    #                          "SRCE’s innovation outlook is neutral based on a current score of 27 out of 99, underperforming sector average. Jobs growth over the past year has increased and insiders sentiment is neutral. Over the past 4 quarters SRCE beat earnings estimates 2 times and it pays dividend lower than its peers",
-    #                          'static/img/graph/SRCE_graph.png',
-    #                          'https:/finance.yahoo.com/quote//SRCE'),
-    #                         ("(Altigen Communications, Inc.Other OTC , Inc.(ATGN )",
-    #                         'As of  1:03PM EDT. Market open.',
-    #                         ' Other OTC Delayed Price. Currency in USD',
-    #                         '1.4900',
-    #                         '+0.0100 (+0.67%)',
-    #                         '1.5000',
-    #                         ' ',
-    #                         'static/img/nodata.png',
-    #                         'https:/finance.yahoo.com/quote/ATGN'),
-    #                         ("(Altigen Communications, Inc.Other OTC , Inc.(ATGN )",
-    #                          'As of  1:03PM EDT. Market open.',
-    #                          ' Other OTC Delayed Price. Currency in USD',
-    #                          '1.4900',
-    #                          '+0.0100 (+0.67%)',
-    #                          '1.5000',
-    #                          ' ',
-    #                          'static/img/nodata.png',
-    #                          'https:/finance.yahoo.com/quote/ATGN')
-    #                         ]
+    company_descriptions = [(' 1st Source CorporationNasdaqGS , Inc.(SRCE )',
+                             'As of  1:51PM EDT. Market open.',
+                             ' NasdaqGS Real Time Price. Currency in USD',
+                             '31.85',
+                             '+1.89 (+5.93%)',
+                             '33.74',
+                             "SRCE’s innovation outlook is neutral based on a current score of 27 out of 99, underperforming sector average. Jobs growth over the past year has increased and insiders sentiment is neutral. Over the past 4 quarters SRCE beat earnings estimates 2 times and it pays dividend lower than its peers",
+                             'static/img/graph/SRCE_graph.png',
+                             'https:/finance.yahoo.com/quote//SRCE'),
+                            ("(Altigen Communications, Inc.Other OTC , Inc.(ATGN )",
+                            'As of  1:03PM EDT. Market open.',
+                            ' Other OTC Delayed Price. Currency in USD',
+                            '1.4900',
+                            '+0.0100 (+0.67%)',
+                            '1.5000',
+                            ' ',
+                            'static/img/nodata.png',
+                            'https:/finance.yahoo.com/quote/ATGN'),
+                            ("(Altigen Communications, Inc.Other OTC , Inc.(ATGN )",
+                             'As of  1:03PM EDT. Market open.',
+                             ' Other OTC Delayed Price. Currency in USD',
+                             '1.4900',
+                             '+0.0100 (+0.67%)',
+                             '1.5000',
+                             ' ',
+                             'static/img/nodata.png',
+                             'https:/finance.yahoo.com/quote/ATGN')
+                            ]
 
     print(company_descriptions)
     return company_descriptions
